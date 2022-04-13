@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const ejs = require('ejs');
-const Blog = require('./models/blog');
+const Blog = require('./models/Blog')
 
 const app = express();
 
@@ -25,6 +25,14 @@ app.get('/', async (req, res) => {
     blogs,
   });
 });
+
+app.get('/posts/:id', async (req,res)=>{
+  const blog = await Blog.findById(req.params.id)
+  res.render('post',{
+    blog
+  })
+})
+
 app.get('/about', (req, res) => {
   res.render('about');
 });
