@@ -10,10 +10,14 @@ const blogControllers = require('./controllers/blogControllers');
 
 const app = express();
 
-mongoose.connect('mongodb://localhost/cleanblog-test-db', {
+mongoose.connect('mongodb+srv://cleanblog:cleanblogapp@cluster0.sbgzs.mongodb.net/cleanblog-db?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-});
+}).then(()=>{
+  console.log('DB connected')
+}).catch((err)=>{
+  console.log(err)
+})
 
 //template engine
 app.set('view engine', 'ejs');
@@ -38,7 +42,7 @@ app.get('/add_post', pageControllers.addPostPage);
 app.get('/about', pageControllers.getAboutPage);
 app.get('/blogs/edit/:id', pageControllers.editPage);
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
   console.log(`sunucu ${port} portunda calisiyor...`);
