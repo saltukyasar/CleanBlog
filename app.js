@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const methodOverride = require('method-override')
 const path = require('path');
 const ejs = require('ejs');
-const Blog = require('./models/Blog')
+const Blog = require('./models/Blog');
+const fs = require('fs');
 
 const app = express();
 
@@ -62,6 +63,10 @@ app.get('/blogs/edit/:id', async (req,res)=>{
   res.render('edit',{
     blog,
   })
+})
+app.delete('/blogs/:id', async (req,res)=>{
+  await Blog.findByIdAndRemove(req.params.id);
+  res.redirect('/');
 })
 
 const port = 3000;
