@@ -35,7 +35,7 @@ app.get('/', async (req, res) => {
 app.get('/posts/:id', async (req,res)=>{
   const blog = await Blog.findById(req.params.id)
   res.render('post',{
-    blog
+    blog,
   })
 })
 
@@ -49,6 +49,20 @@ app.post('/blogs', async (req, res) => {
   await Blog.create(req.body);
   res.redirect('/');
 });
+app.put('/blogs/:id', async (req,res)=>{
+  const blog = await Blog.findOne({ _id: req.params.id });
+  blog.title = req.body.title;
+  blog.detail = req.body.detail;
+  blog.save();
+
+  res.redirect(`/posts/${req.params.id}`);
+})
+app.get('/blogs/edit/:id', async (req,res)=>{
+  const blog = await Blog.findOne({_id: req.params.id});
+  res.render('edit',{
+    blog,
+  })
+})
 
 const port = 3000;
 

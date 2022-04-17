@@ -29,11 +29,21 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <h1> <%= blog.title %> </h1>
-          <h1> <%= blog.detail %> </h1>
+          <h2> <%= blog.detail %> </h2>
           <span class="meta"> <%= blog.dateCreated %></span>
+          
         </div>
+        <div class="tm-bg-gray tm-share-box">
+        <div class="text-center">
+          <a href="/blogs/edit/<%= blog._id %>"class="btn btn-primary p-0 mb-4 tm-btn-animate tm-btn-download tm-icon-download"><span>Update Details</span></a>	
+        </div>	
+        <div class="text-center">
+          <a href="/blogs/<%= blog._id %>?_method=DELETE" class="btn btn-danger p-0 tm-btn-animate tm-btn-download tm-icon-download"
+            onclick="confirm('ARE YOU SURE?')"><span>Delete Blog</span></a>								</div>
+          </div>
       </div>
     </div>
+    
   </article>
 
   <hr>
