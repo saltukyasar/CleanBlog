@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const methodOverride = require('method-override')
 const path = require('path');
 const ejs = require('ejs');
 const Blog = require('./models/Blog')
@@ -18,6 +19,11 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(
+  methodOverride('_method', {
+    methods: ['POST','GET'],
+  })
+)
 
 app.get('/', async (req, res) => {
   const blogs = await Blog.find({});
