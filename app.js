@@ -10,7 +10,7 @@ const blogControllers = require('./controllers/blogControllers');
 
 const app = express();
 
-mongoose.connect('mongodb+srv://cleanblog:cleanblogapp@cluster0.sbgzs.mongodb.net/cleanblog-db?retryWrites=true&w=majority', {
+mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 }).then(()=>{
